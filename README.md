@@ -1,38 +1,6 @@
-# Turborepo starter with shadcn/ui
-
-![Static Badge](https://img.shields.io/badge/shadcn%2Fui-0.8.0-blue?link=https%3A%2F%2Fgithub.com%2Fshadcn%2Fui)
-
-This is Turborepo starter with shadcn/ui pre-configured.
-
-> [!NOTE]
-> This example uses `npm` as package manager.
-
-[pnpm version](https://github.com/dan5py/turborepo-shadcn-ui)
-
-## Using this example
-
-Clone the repository:
-
-```sh
-git clone https://github.com/dan5py/turborepo-shadcn-ui.git --branch npm
-```
+# Point0 Survey
 
 Install dependencies:
-
-```sh
-cd turborepo-shadcn-ui
-npm install
-```
-
-### Add ui components
-
-Use the pre-made script:
-
-```sh
-npm run ui:add <component-name> -- <options>
-```
-
-> This works just like the add command in the `shadcn/ui` CLI.
 
 ### Add a new app
 
