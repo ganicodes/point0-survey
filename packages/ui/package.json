@@ -12,6 +12,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@repo/db": "*",
     "@types/node": "^20",
     "@types/react": "^18",
     "autoprefixer": "^10.4.19",
@@ -62,6 +63,7 @@
     "next-themes": "^0.3.0",
     "react-day-picker": "^8.10.1",
     "react-hook-form": "^7.52.0",
+    "react-loader-spinner": "^6.1.6",
     "react-resizable-panels": "^2.0.19",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",

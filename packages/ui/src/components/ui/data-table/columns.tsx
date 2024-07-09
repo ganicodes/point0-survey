@@ -59,13 +59,13 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "status",
+    accessorKey: "type",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Type" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
-        (status) => status.value === row.getValue("status"),
+        (status) => status.value === row.getValue("type"),
       );
 
       if (!status) {

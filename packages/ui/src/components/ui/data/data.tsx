@@ -1,13 +1,13 @@
 import {
-    ArrowDownIcon,
-    ArrowRightIcon,
-    ArrowUpIcon,
-    CheckCircledIcon,
-    CircleIcon,
-    CrossCircledIcon,
-    QuestionMarkCircledIcon,
-    StopwatchIcon,
-} from "@radix-ui/react-icons"
+  ArrowDownIcon,
+  ArrowRightIcon,
+  ArrowUpIcon,
+  CheckCircledIcon,
+  CircleIcon,
+  CrossCircledIcon,
+  QuestionMarkCircledIcon,
+  StopwatchIcon,
+} from "@radix-ui/react-icons";
 
 export const labels = [
   {
@@ -22,7 +22,7 @@ export const labels = [
     value: "documentation",
     label: "Documentation",
   },
-]
+];
 
 export const statuses = [
   {
@@ -50,7 +50,7 @@ export const statuses = [
     label: "Canceled",
     icon: CrossCircledIcon,
   },
-]
+];
 
 export const priorities = [
   {
@@ -68,18 +68,28 @@ export const priorities = [
     value: "high",
     icon: ArrowUpIcon,
   },
-]
+];
 
-import { z } from "zod"
+import { z } from "zod";
 
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
 export const taskSchema = z.object({
   id: z.string(),
   title: z.string(),
-  status: z.string(),
+  type: z.string(),
   label: z.string(),
   priority: z.string(),
-})
+});
 
-export type Task = z.infer<typeof taskSchema>
+// export const taskSchema = z.object({
+//   id: z.string(),
+//   title: z.string(),
+//   type: z.string(),
+//   createdAt: z.string(),
+//   updatedAt: z.string(),
+//   createdBy: z.number(),
+//   updatedBy: z.number(),
+// });
+
+export type Task = z.infer<typeof taskSchema>;

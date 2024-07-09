@@ -3,6 +3,8 @@ export {
   Circle,
   CirclePlus,
   CircleUser,
+  Copy,
+  Edit,
   Eye,
   FilePenLine,
   Home,
@@ -15,6 +17,7 @@ export {
   ShoppingCart,
   SquareCheck,
   Star,
+  Trash,
   Users,
   X,
 } from "lucide-react";

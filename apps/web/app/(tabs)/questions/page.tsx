@@ -1,5 +1,6 @@
 import PageWrapper from "../../../components/PageWrapper";
 import { TabsDemo } from "../../../components/Tabs";
+import QuestionSet from "../../../components/question-set/QuestionSet";
 import Question from "../../../components/questions/Question";
 
 const Questions = () => {
@@ -15,7 +16,7 @@ const Questions = () => {
           {
             label: "Question Set",
             value: "Set",
-            component: <Question />,
+            component: <QuestionSet />,
           },
         ]}
         defaultValue="Questions"
