@@ -1,5 +1,6 @@
 import { z } from "zod";
 export const addQuestionSchema = z.object({
+  id: z.number().default(0),
   title: z
     .string()
     .min(1, {
@@ -9,7 +10,7 @@ export const addQuestionSchema = z.object({
   type: z.string().min(1, {
     message: "Please select question type",
   }),
-  options: z.array(z.object({ text: z.string() })),
+  options: z.array(z.object({ id: z.number(), text: z.string() })),
 });
 
 export type addQuestionSchemaType = z.infer<typeof addQuestionSchema>;

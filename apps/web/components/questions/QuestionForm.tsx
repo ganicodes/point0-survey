@@ -30,13 +30,7 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 import { useSWRConfig } from "swr";
 import { useToast } from "../../../../packages/ui/src/components/ui/use-toast";
@@ -52,24 +46,17 @@ import {
 const QuestionForm = ({
   isUpdate,
   formData = {
+    id: 0,
     title: "",
     type: "",
-    options: [{ text: "Option 1" }],
+    options: [{ id: 0, text: "Option 1" }],
   },
   setOpen,
 }: {
   isUpdate?: boolean;
-  formData?: any;
+  formData?: addQuestionSchemaType;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }): ReactNode => {
-  const [selectedType, setSelectedType] = useState("");
-  const { toast } = useToast();
-  const { mutate } = useSWRConfig();
-  useEffect(() => {
-    console.log("formData: ", formData);
-    // console.log("form.formState: ", form.getValues());
-  }, [formData]);
-
   const form = useForm<addQuestionSchemaType>({
     resolver: zodResolver(addQuestionSchema),
     defaultValues: {
@@ -77,9 +64,13 @@ const QuestionForm = ({
     },
   });
 
+  const [selectedType, setSelectedType] = useState("");
+  const { toast } = useToast();
+  const { mutate } = useSWRConfig();
+
   const handleAddOption = () => {
     let tempOptions = Array.from(form.getValues("options"));
-    tempOptions.push({ text: `Option ${tempOptions.length + 1}` });
+    tempOptions.push({ id: 0, text: `Option ${tempOptions.length + 1}` });
     form.setValue("options", tempOptions, { shouldValidate: true });
   };
 
@@ -88,25 +79,6 @@ const QuestionForm = ({
     tempOptions.splice(index, 1);
     form.setValue("options", tempOptions, { shouldValidate: true });
   };
-
-  async function onSubmit(values: addQuestionSchemaType) {
-    try {
-      let id;
-      if (isUpdate) {
-        id = await updateQuestion(formData?.id, values);
-        mutate("/api/questions");
-      } else {
-        id = await addQuestion({ ...values });
-        mutate("/api/questions");
-      }
-      toast({
-        description: `Your question has been created with id ${id}.`,
-      });
-      setOpen && setOpen(false);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   const AddOption = ({ type }: { type: string }) => {
     return (
@@ -121,6 +93,24 @@ const QuestionForm = ({
       </div>
     );
   };
+
+  async function onSubmit(values: addQuestionSchemaType) {
+    try {
+      if (isUpdate) {
+        await updateQuestion(formData?.id, values);
+        mutate("/api/questions");
+      } else {
+        await addQuestion({ ...values });
+        mutate("/api/questions");
+      }
+      toast({
+        description: `Your question has been ${isUpdate ? "updated" : "created"}.`,
+      });
+      setOpen && setOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <DialogContent className="md:max-w-screen-md max-w-[425px]">
@@ -199,7 +189,11 @@ const QuestionForm = ({
                     className="border-0 border-foreground rounded-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 focus-visible:border-b"
                     onChange={(e) => {
                       let tempOptions = Array.from(form.getValues("options"));
-                      tempOptions[index] = { text: e.target.value };
+                      let ele = tempOptions[index]!;
+                      tempOptions[index] = {
+                        id: ele.id,
+                        text: e.target.value,
+                      };
                       form.setValue("options", tempOptions, {
                         shouldValidate: true,
                       });

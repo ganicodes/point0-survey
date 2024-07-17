@@ -20,7 +20,6 @@ const Question = () => {
         <AddQuestion />
         <div className="flex items-center space-x-2"></div>
       </div>
-
       <DataTable
         data={data?.questions}
         columns={QuestionsDataTableColumns}

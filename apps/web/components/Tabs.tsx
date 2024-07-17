@@ -25,7 +25,9 @@ export function TabsDemo({
       </TabsList>
       {Array.isArray(tabs) &&
         tabs?.map((item, index) => (
-          <TabsContent value={item?.value}>{item?.component}</TabsContent>
+          <TabsContent className="" value={item?.value}>
+            {item?.component}
+          </TabsContent>
         ))}
     </Tabs>
   );

@@ -4,6 +4,9 @@ const client = new PrismaClient();
 
 export async function GET() {
   const questions = await client.questions.findMany({
+    where: {
+      isActive: true,
+    },
     include: {
       options: {
         select: {
